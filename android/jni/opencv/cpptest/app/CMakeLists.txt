@@ -38,14 +38,6 @@ file (GLOB mushroom_SRC
 	"src/main/cpp/*.h"
 )
 
-#message(STATUS "==>root:${CMAKE_FIND_ROOT_PATH}")
-#message(STATUS "==>LIB:		 ${OPEN_CV_LIB_DIR}")
-#message(STATUS "==>opencv include dirs at ${OpenCV_INCLUDE_DIRS}")
-#message(STATUS "==>opencv at ${OpenCV_LIBS} --at-- ${OPEN_CV_LIB_DIR}")
-#message(STATUS "==>${OpenCV_FOUND} libraries2:${OpenCV_LIBS}")
-#message(STATUS "==>opencv is installed at ${OpenCV_INSTALL_PATH}")
-#message(STATUS "==>source code to compile: ${mushroom_SRC}")
-
 add_library(mushroomlib SHARED
     ${mushroom_SRC}
     ${JNI_HEADER_FILE}
@@ -67,5 +59,5 @@ find_library(stl-lib gnustl_shared
 	HINTS "${TOOLCHAIN_LIB64}" NO_CMAKE_FIND_ROOT_PATH
 )
 find_library(z-lib z)
-message(STATUS "stlport lib: ${stlport_static-lib}, toolchain: ${TOOLCHAIN_LIB64}")
+message(STATUS "stlport lib: ${stl-lib}, toolchain: ${TOOLCHAIN_LIB64}")
 target_link_libraries(mushroomlib ${log-lib} ${LIBS} ${stl-lib} ${z-lib})
