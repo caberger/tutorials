@@ -22,15 +22,18 @@ public class MainActivity extends AppCompatActivity {
 
         AssetUtilities assetUtilities = new AssetUtilities(this);
         TextView tv = (TextView) findViewById(R.id.sample_text);
-        ImageView imageView = (ImageView)findViewById(R.id.image);
+        ImageView originalImageView = (ImageView)findViewById(R.id.image);
+        ImageView grayedView = (ImageView)findViewById(R.id.gray);
         AssetManager assetManager = getAssets();
         Mushroom mushRoom = new Mushroom();
         File[] files = fetchImages();
         for (File file: files) {
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            originalImageView.setImageBitmap(bitmap);
             String type = mushRoom.computeSchwammerlType(file.getAbsolutePath());
             Log.d(TAG, "found file " + file +  " type " + type);
-            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-            imageView.setImageBitmap(bitmap);
+            bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            grayedView.setImageBitmap(bitmap);
         }
     }
     private File[] fetchImages() {

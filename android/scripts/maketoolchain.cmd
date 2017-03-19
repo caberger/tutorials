@@ -1,3 +1,4 @@
+REM Script to make a native toolchain. Please see android documentation for details.
 SET ARCH=x86_64
 mkdir ndk
 pushd ndk

@@ -12,7 +12,8 @@ opencv in der Android Native Toolchain kompilieren
 5. [Android NDK standalone toolchain](https://developer.android.com/ndk/guides/standalone_toolchain.html) durchlesen und die Parameter in der Datei ```maketoolchain.cmd``` anpassen. 
 6. OpenCV [Source Code](https://github.com/opencv/opencv/releases) downloaden und in ein Verzeichnis entpacken.
 4. Die Datei ```scripts\env.cmd``` auf die Pfade am eigenen Rechner anpassen.
-4. eine Shell öffnen durch das Doppelklicken der Datei ```shell.cmd``` im Unterverzeichnis ```scripts```, dorthin wechseln und dann von dieser Commandline aus maketoolchain.cmd ausführen, dies erstellt auf dem Desktop ein Toolchain -Verzeichnis ```ndk```
-7. im immer noch offenen Command - Prompt eingeben: opencvbuild.cmd
+4. eine Shell öffnen durch das Doppelklicken der Datei ```shell.cmd``` im Verzeichnis ```scripts```, dorthin wechseln und dann von dieser Commandline aus maketoolchain.cmd ausführen, dies erstellt auf dem Desktop ein Toolchain -Verzeichnis ```ndk```
 13. dieses neu installierte install Verzeichnis enthält jetzt die include und library - Dateien für die in der Toolchain gewählte Architektur.
+14. libgnustl_shared.so aus dem Toolchain Verzeichnis nach src/main/jnilibs/%ABI% kopieren.
+7. Ins Unterverzeichnis app/opencvbuild wechseln und readme dort lesen um opencv zu bauen.
 
