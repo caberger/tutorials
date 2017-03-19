@@ -6,6 +6,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 
 #include "logging.h"
+#include "GrayScaler.h"
 
 using namespace cv;
 using namespace std;
@@ -36,16 +37,14 @@ extern "C"
 JNIEXPORT jstring JNICALL Java_com_example_christianaberger_cpptest_Mushroom_computeSchwammerlType
         (JNIEnv *env, jobject object, jstring name) {
 
-    //wstring wstringVal = towstring(env, name);
-    String fileName = toString(env, name);
+    const char *nativeString = env->GetStringUTFChars(name, NULL);
+    String fileName = nativeString;
 
-    Mat gray = imread(fileName, CV_LOAD_IMAGE_GRAYSCALE); // use openCV
-    blur(gray, gray, Size(3,3));
-    int tresh = 100;
-    imwrite(fileName, gray);
-
+    GrayScaler grayScaler;
+    grayScaler.convertFiletoGray(fileName.c_str());
     string stdString = "also stl strings work!";
     LOGD("also stl strings work: %s", stdString.c_str());
-
-    return env->NewStringUTF(fileName.c_str());
+    fileName = "";
+    env->ReleaseStringUTFChars(name, nativeString);
+    return env->NewStringUTF(nativeString);
 }
