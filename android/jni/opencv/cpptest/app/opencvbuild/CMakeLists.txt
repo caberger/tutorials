@@ -1,0 +1,17 @@
+
+cmake_minimum_required(VERSION 3.4.1)
+SET(WITH_IPP OFF)
+set(JAVA_HOME "$ENV{JAVA_HOME}")
+set(OPENCV_SRC_DIR "$ENV{OPENCV_SOURCE_CODE_DIR}")
+set(OPENCV_BINARY_DIR "${OPENCV_SRC_DIR}/build")
+
+file(MAKE_DIRECTORY "${OPENCV_BINARY_DIR}")
+
+message(STATUS "build opencv from source ${OPENCV_SRC_DIR}==>${OPENCV_BINARY_DIR}")
+
+if(NOT DEFINED CMAKE_INSTALL_PREFIX)
+  set(CMAKE_INSTALL_PREFIX "${OPENCV_BINARY_DIR}/install")
+endif()
+
+add_subdirectory("${OPENCV_SRC_DIR}" "${OPENCV_BINARY_DIR}")
+
