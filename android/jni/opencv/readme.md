@@ -2,18 +2,18 @@ Android NDK OpenCV/C++ Tutorial
 ===============================
 
 
-opencv in der Android Native Toolchain kompilieren
---------------------------------------------------
+Compile and use OpenCV in the Android Native Standalone Toolchain
+------------------------------------------------------
 
-1. Android Studo in in aktuellster Version installieren
-2. in den "Android SDK Tools" CMake und NDK installieren
-3. Python installieren
-4. CMake installieren
-5. [Android NDK standalone toolchain](https://developer.android.com/ndk/guides/standalone_toolchain.html) durchlesen und die Parameter in der Datei ```maketoolchain.cmd``` anpassen. 
-6. OpenCV [Source Code](https://github.com/opencv/opencv/releases) downloaden und in ein Verzeichnis entpacken.
-4. Die Datei ```scripts\env.cmd``` auf die Pfade am eigenen Rechner anpassen.
-4. eine Shell öffnen durch das Doppelklicken der Datei ```shell.cmd``` im Verzeichnis ```scripts```, dorthin wechseln und dann von dieser Commandline aus maketoolchain.cmd ausführen, dies erstellt auf dem Desktop ein Toolchain -Verzeichnis ```ndk```
-13. dieses neu installierte install Verzeichnis enthält jetzt die include und library - Dateien für die in der Toolchain gewählte Architektur.
-14. libgnustl_shared.so aus dem Toolchain Verzeichnis nach src/main/jnilibs/%ABI% kopieren.
-7. Ins Unterverzeichnis app/opencvbuild wechseln und readme dort lesen um opencv zu bauen.
+1. install the latest version of Android Studio
+2. in "Android SDK Tools" install CMake, NDK and LLDB
+3. install Python
+4. install CMake
+6. download OpenCV [Source Code](https://github.com/opencv/opencv/releases) source code and unpack it to a folder.
+5. read and understand [Android NDK standalone toolchain](https://developer.android.com/ndk/guides/standalone_toolchain.html) and adjust the parameters in the file ```maketoolchain.cmd```. 
+4. adjust the paths in ```scripts\env.cmd``` to the paths on your computer.
+4. open a command prompt by double klicking ```shell.cmd``` im the ```scripts``` folder, change in the command prompt to the scripts folder and run ```maketoolchain.cmd```this will create a ```ndk``` subfolder and a folder with the standalone toolchain.
+13. This folder now contains the include files and libraries for the chosen ABI.
+14. copy libgnustl_shared.so from this folder to src/main/jnilibs/%ABI%.
+7. change to the subfolder ```app/opencvbuild``` and read the readme there to build opencv from the C++ source.
 
