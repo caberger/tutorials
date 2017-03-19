@@ -26,7 +26,6 @@ wstring towstring(JNIEnv* env, jstring string)  {
             memset(tmp, 0, (len + 1) * sizeof(wchar_t));
             memcpy(tmp, raw, len * sizeof(wchar_t));
             value = tmp;
-            //value.assign(tmp, len);
             delete[] tmp;
             env->ReleaseStringChars(string, raw);
         }
