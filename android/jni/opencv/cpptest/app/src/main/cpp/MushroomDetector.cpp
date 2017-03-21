@@ -6,6 +6,7 @@
 #include "JniUtil.h"
 #include "GrayScaler.h"
 #include "Mushroom.h"
+#include "MushroomDetector.h
 
 using namespace cv;
 using namespace std;
@@ -64,6 +65,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_example_christianaberger_cpptest_Mushroo
         Mushroom mushroom = marshaller.fromJavaObject(templateElement);
         mushrooms.push_back(mushroom);
     }
+    // detect....
     jobjectArray objs = env->NewObjectArray(0, elementClass, NULL);
 
     GrayScaler grayScaler;

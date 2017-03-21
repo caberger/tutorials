@@ -51,13 +51,6 @@ add_custom_command(
 	WORKING_DIRECTORY "${MAIN_JAVA_SOURCE_DIR}"
 	DEPENDS	"${INTERFACE_FILE}"
 )
-add_custom_command(
-	OUTPUT "${JNI_SIGNATURE_FILE}"
-	COMMAND ${CMAKE_COMMAND} -E env "PATH=${JAVA_HOME}/bin;$ENV{PATH}" javap -s -cp build/intermediates/classes/debug com.example.christianaberger.cpptest.Mushroom > ${JNI_SIGNATURE_FILE}
-#	COMMAND ${CMAKE_COMMAND} -E env "PATH=${JAVA_HOME}/bin;$ENV{PATH}" javah -o ${JNI_HEADER_FILE} com.example.christianaberger.cpptest.MushroomDetector
-	WORKING_DIRECTORY "${MAIN_JAVA_SOURCE_DIR}"
-	DEPENDS	"${INTERFACE_FILE}"
-)
 
 link_directories("/Users/aberger/Downloads/opencv-3.2.0/install/sdk/native/libs/x86_64/")
 find_library(log-lib log)
