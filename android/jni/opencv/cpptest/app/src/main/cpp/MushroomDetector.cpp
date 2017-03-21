@@ -6,7 +6,7 @@
 #include "JniUtil.h"
 #include "GrayScaler.h"
 #include "Mushroom.h"
-#include "MushroomDetector.h
+#include "MushroomDetector.h"
 
 using namespace cv;
 using namespace std;
@@ -25,6 +25,7 @@ public:
  * @return the converted c++ Mushroom object
  */
     Mushroom fromJavaObject(jobject obj);
+    jobject asJavaObject(const Mushroom& mushroom);
 private:
     JNIEnv *env;
 };
@@ -46,6 +47,9 @@ Mushroom MushroomMarshaller::fromJavaObject(jobject obj) {
     mushroom.mushRoomName = util.getStringField(obj, "mushroomName");
     mushroom.round = util.getBooleanField(obj, "round");
     return mushroom;
+}
+jobject MushroomMarshaller::asJavaObject(const Mushroom& mushroom) {
+    return NULL;
 }
 extern "C"
 JNIEXPORT jobjectArray JNICALL Java_com_example_christianaberger_cpptest_MushroomDetector_computeSchwammerlType
