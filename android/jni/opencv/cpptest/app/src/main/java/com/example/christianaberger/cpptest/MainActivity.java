@@ -25,13 +25,17 @@ public class MainActivity extends AppCompatActivity {
         ImageView originalImageView = (ImageView)findViewById(R.id.image);
         ImageView grayedView = (ImageView)findViewById(R.id.gray);
         AssetManager assetManager = getAssets();
-        Mushroom mushRoom = new Mushroom();
+        MushroomDetector mushRoom = new MushroomDetector();
         File[] files = fetchImages();
         for (File file: files) {
             Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
             originalImageView.setImageBitmap(bitmap);
-            String type = mushRoom.computeSchwammerlType(file.getAbsolutePath());
-            Log.d(TAG, "found file " + file +  " type " + type);
+            Mushroom mushroom = new Mushroom();
+            mushroom.color = new byte[] {(byte)0x01, (byte)0x02, (byte)0x03};
+            mushroom.mushroomName = "a name";
+            Mushroom[] templates = new Mushroom[] {mushroom};
+            Mushroom[] mushrooms = mushRoom.computeSchwammerlType(templates, file.getAbsolutePath());
+            Log.d(TAG, "found file " + file +  " type " + mushrooms);
             bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
             grayedView.setImageBitmap(bitmap);
         }

@@ -3,9 +3,10 @@ cmake_minimum_required(VERSION 3.4.1)
 set(JAVA_HOME "$ENV{JAVA_HOME}")
 set(MAIN_JAVA_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/main/java")
 set(MAIN_CPP_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp")
-set(JNI_HEADER_FILE "${MAIN_CPP_SOURCE_DIR}/mushroom.h")
-set(JAVA_H "\"${JAVA_HOME}/javah\"")
-set(INTERFACE_FILE "${MAIN_JAVA_SOURCE_DIR}/com/example/christianaberger/cpptest/Mushroom.java")
+set(JNI_HEADER_FILE "${MAIN_CPP_SOURCE_DIR}/MushroomDetector.h")
+set(JNI_SIGNATURE_FILE "${MAIN_CPP_SOURCE_DIR}/MushroomDetector_signature.txt")
+# set(JAVA_H "\"${JAVA_HOME}/javah\"")
+set(INTERFACE_FILE "${MAIN_JAVA_SOURCE_DIR}/com/example/christianaberger/cpptest/MushroomDetector.java")
 
 set(OPENCV_SRC_DIR "$ENV{OPENCV_SOURCE_CODE_DIR}")
 set(OPENCV_SDK_DIR "${OPENCV_SRC_DIR}/install/sdk/native")
@@ -46,7 +47,14 @@ add_library(mushroomlib SHARED
 # execute the javah command and create the header file for the jni implementation:
 add_custom_command(
 	OUTPUT "${JNI_HEADER_FILE}"
-	COMMAND ${CMAKE_COMMAND} -E env "PATH=${JAVA_HOME}/bin;$ENV{PATH}" javah -o ${JNI_HEADER_FILE} com.example.christianaberger.cpptest.Mushroom
+	COMMAND ${CMAKE_COMMAND} -E env "PATH=${JAVA_HOME}/bin;$ENV{PATH}" javah -o ${JNI_HEADER_FILE} com.example.christianaberger.cpptest.MushroomDetector
+	WORKING_DIRECTORY "${MAIN_JAVA_SOURCE_DIR}"
+	DEPENDS	"${INTERFACE_FILE}"
+)
+add_custom_command(
+	OUTPUT "${JNI_SIGNATURE_FILE}"
+	COMMAND ${CMAKE_COMMAND} -E env "PATH=${JAVA_HOME}/bin;$ENV{PATH}" javap -s -cp build/intermediates/classes/debug com.example.christianaberger.cpptest.Mushroom > ${JNI_SIGNATURE_FILE}
+#	COMMAND ${CMAKE_COMMAND} -E env "PATH=${JAVA_HOME}/bin;$ENV{PATH}" javah -o ${JNI_HEADER_FILE} com.example.christianaberger.cpptest.MushroomDetector
 	WORKING_DIRECTORY "${MAIN_JAVA_SOURCE_DIR}"
 	DEPENDS	"${INTERFACE_FILE}"
 )
