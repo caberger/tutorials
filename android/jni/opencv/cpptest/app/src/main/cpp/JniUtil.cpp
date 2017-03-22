@@ -25,15 +25,30 @@ vector<unsigned char> JniUtil::getByteArrayField(jobject obj, const char *name) 
     env->ReleaseByteArrayElements(byteArray, color, 0);
     return bytes;
 }
+void JniUtil::setBytearrayField(jobject, const char *name, unsigned char *bytes, int length) {
+    //TODO: implement this
+}
+
 string JniUtil::getStringField(jobject obj, const char *name) {
     jclass klass = env->GetObjectClass(obj);
     jfieldID fid = env->GetFieldID(klass, "mushroomName", "Ljava/lang/String;");
     jstring stringObject = (jstring)env->GetObjectField(obj, fid);
     return stringObject ? toString(stringObject) : "";
 }
+void JniUtil::setStringField(jobject object, const char *name, const char *value) {
+    jclass klass = env->GetObjectClass(object);
+    jfieldID fieldId = env->GetFieldID(klass, name, "Ljava/lang/String;");
+    jstring val = env->NewStringUTF(value);
+    env->SetObjectField(object, fieldId, val);
+}
 bool JniUtil::getBooleanField(jobject object, const char *name) {
     jclass klass = env->GetObjectClass(object);
     jfieldID fid = env->GetFieldID(klass, name, "Z");
     jboolean val = env->GetBooleanField(object, fid);
     return val ? true : false;
+}
+void JniUtil::setBooleanField(jobject object, const char *name, bool value) {
+    jclass klass = env->GetObjectClass(object);
+    jfieldID fid = env->GetFieldID(klass, name, "Z");
+    env->SetBooleanField(object, fid, value ? JNI_TRUE : JNI_FALSE);
 }

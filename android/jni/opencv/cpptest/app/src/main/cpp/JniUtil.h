@@ -17,8 +17,13 @@ public:
     }
     string toString(jstring jniString);
     vector<unsigned char> getByteArrayField(jobject object, const char *name);
+    void setBytearrayField(jobject, const char *name, unsigned char *bytes, int length);
+
     string getStringField(jobject object, const char *name);
+    void setStringField(jobject object, const char *name, const char *value);
+
     bool getBooleanField(jobject object, const char *name);
+    void setBooleanField(jobject, const char *name, bool value);
 private:
     JNIEnv *env;
 };

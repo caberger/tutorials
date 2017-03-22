@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
             mushroom.mushroomName = "a name";
             Mushroom[] templates = new Mushroom[] {mushroom};
             Mushroom[] mushrooms = mushRoom.computeSchwammerlType(templates, file.getAbsolutePath());
-            Log.d(TAG, "found file " + file +  " type " + mushrooms);
+            for (Mushroom mr: mushrooms) {
+                Log.d(TAG, "mshroom: " + mr);
+            }
             bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
             grayedView.setImageBitmap(bitmap);
         }

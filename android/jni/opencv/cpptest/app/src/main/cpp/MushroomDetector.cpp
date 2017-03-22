@@ -24,8 +24,8 @@ public:
  * @param obj the Mushroom java object
  * @return the converted c++ Mushroom object
  */
-    Mushroom fromJavaObject(jobject obj);
-    jobject asJavaObject(const Mushroom& mushroom);
+    Mushroom fromJavaObject(jobject);
+    jobject asJavaObject(jclass, const Mushroom&);
 private:
     JNIEnv *env;
 };
@@ -48,8 +48,15 @@ Mushroom MushroomMarshaller::fromJavaObject(jobject obj) {
     mushroom.round = util.getBooleanField(obj, "round");
     return mushroom;
 }
-jobject MushroomMarshaller::asJavaObject(const Mushroom& mushroom) {
-    return NULL;
+jobject MushroomMarshaller::asJavaObject(jclass clazz, const Mushroom& mushroom) {
+    JniUtil util(env);
+
+    jmethodID fid = env->GetMethodID(clazz, "<init>", "()V");
+    jobject object = env->NewObject(clazz, fid);
+
+    util.setStringField(object, "mushroomName", mushroom.mushRoomName.c_str());
+    util.setBooleanField(object, "round", true);
+    return object;
 }
 extern "C"
 JNIEXPORT jobjectArray JNICALL Java_com_example_christianaberger_cpptest_MushroomDetector_computeSchwammerlType
@@ -57,7 +64,6 @@ JNIEXPORT jobjectArray JNICALL Java_com_example_christianaberger_cpptest_Mushroo
     JniUtil util(env);
     MushroomMarshaller marshaller(env);
 
-    string path = util.toString(filePath);
     int length = env->GetArrayLength(templates);
     vector<Mushroom> mushrooms;
     jclass elementClass = NULL;
@@ -69,9 +75,18 @@ JNIEXPORT jobjectArray JNICALL Java_com_example_christianaberger_cpptest_Mushroo
         Mushroom mushroom = marshaller.fromJavaObject(templateElement);
         mushrooms.push_back(mushroom);
     }
-    // detect....
-    jobjectArray objs = env->NewObjectArray(0, elementClass, NULL);
+    vector<Mushroom> result = mushrooms; // for the demo we return the same data
+    // in the real app call opencv detect method here that returns the result...
 
+    jobjectArray objs = env->NewObjectArray(mushrooms.size(), elementClass, NULL);
+    jsize index = 0;
+    for(vector<Mushroom>::iterator it = result.begin(); it != result.end(); it++) {
+        jobject object = marshaller.asJavaObject(elementClass, *it);
+        env->SetObjectArrayElement(objs, index++, object);
+    }
+
+    // as a Demo that opencv works we use it to convert the image to grayscale...
+    string path = util.toString(filePath);
     GrayScaler grayScaler;
     grayScaler.convertFiletoGray(util.toString(filePath).c_str());
     return objs;
