@@ -12,8 +12,7 @@ string JniUtil::toString(jstring jniString) {
 }
 vector<unsigned char> JniUtil::getByteArrayField(jobject obj, const char *name) {
     jclass klass = env->GetObjectClass(obj);
-    jfieldID fid = env->GetFieldID(klass, "color", "[B");
-
+    jfieldID fid = env->GetFieldID(klass, name, "[B");
     jobject colorObject = env->GetObjectField(obj, fid);
     jbyteArray& byteArray = reinterpret_cast<jbyteArray&>(colorObject);
     int length = env->GetArrayLength(byteArray);
@@ -25,13 +24,18 @@ vector<unsigned char> JniUtil::getByteArrayField(jobject obj, const char *name) 
     env->ReleaseByteArrayElements(byteArray, color, 0);
     return bytes;
 }
-void JniUtil::setBytearrayField(jobject, const char *name, unsigned char *bytes, int length) {
-    //TODO: implement this
-}
+void JniUtil::setBytearrayField(jobject object, const char *name, char *bytes, int length) {
+    jclass klass = env->GetObjectClass(object);
 
+    jbyteArray byteArray = env->NewByteArray(length);
+    env->SetByteArrayRegion(byteArray, 0, length, (jbyte *)bytes);
+
+    jfieldID fid = env->GetFieldID(klass, name, "[B");
+    env->SetObjectField(object, fid, byteArray);
+}
 string JniUtil::getStringField(jobject obj, const char *name) {
     jclass klass = env->GetObjectClass(obj);
-    jfieldID fid = env->GetFieldID(klass, "mushroomName", "Ljava/lang/String;");
+    jfieldID fid = env->GetFieldID(klass, name, "Ljava/lang/String;");
     jstring stringObject = (jstring)env->GetObjectField(obj, fid);
     return stringObject ? toString(stringObject) : "";
 }

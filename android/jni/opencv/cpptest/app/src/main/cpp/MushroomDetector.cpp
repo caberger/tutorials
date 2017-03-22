@@ -55,7 +55,13 @@ jobject MushroomMarshaller::asJavaObject(jclass clazz, const Mushroom& mushroom)
     jobject object = env->NewObject(clazz, fid);
 
     util.setStringField(object, "mushroomName", mushroom.mushRoomName.c_str());
-    util.setBooleanField(object, "round", true);
+    util.setBooleanField(object, "round", mushroom.round);
+    static const int dims = 3;
+    char bytes[dims];
+    for(int i = 0; i < dims; i++) {
+        bytes[i] = mushroom.color[i];
+    }
+    util.setBytearrayField(object, "color", bytes, dims);
     return object;
 }
 extern "C"
