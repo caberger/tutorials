@@ -10,18 +10,18 @@ string JniUtil::toString(jstring jniString) {
     env->ReleaseStringUTFChars(jniString, nativeString);
     return cvString;
 }
-vector<unsigned char> JniUtil::getByteArrayField(jobject obj, const char *name) {
+vector<char> JniUtil::getByteArrayField(jobject obj, const char *name) {
     jclass klass = env->GetObjectClass(obj);
     jfieldID fid = env->GetFieldID(klass, name, "[B");
     jobject colorObject = env->GetObjectField(obj, fid);
     jbyteArray& byteArray = reinterpret_cast<jbyteArray&>(colorObject);
     int length = env->GetArrayLength(byteArray);
-    jbyte *color = env->GetByteArrayElements(byteArray, NULL);
-    vector<unsigned char> bytes;
+    jbyte *byteArrayElements = env->GetByteArrayElements(byteArray, NULL);
+    vector<char> bytes;
     for (int i = 0; i < length; i++) {
-        bytes.push_back(color[i]);
+        bytes.push_back(byteArrayElements[i]);
     }
-    env->ReleaseByteArrayElements(byteArray, color, 0);
+    env->ReleaseByteArrayElements(byteArray, byteArrayElements, 0);
     return bytes;
 }
 void JniUtil::setBytearrayField(jobject object, const char *name, char *bytes, int length) {

@@ -40,9 +40,10 @@ Mushroom MushroomMarshaller::fromJavaObject(jobject obj) {
     Mushroom mushroom;
     JniUtil util(env);
 
-    vector<unsigned char> bytes = util.getByteArrayField(obj, "color");
-    for (int i = 0; i < bytes.size(); i++) {
-        mushroom.color[i] = bytes[i];
+    vector<char> bytes = util.getByteArrayField(obj, "color");
+    int index = 0;
+    for (vector<char>::iterator it = bytes.begin(); it != bytes.end(); it++) {
+        mushroom.color[index++] = *it;
     }
     mushroom.mushRoomName = util.getStringField(obj, "mushroomName");
     mushroom.round = util.getBooleanField(obj, "round");

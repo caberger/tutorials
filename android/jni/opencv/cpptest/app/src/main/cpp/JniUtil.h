@@ -11,14 +11,14 @@
 
 using namespace std;
 
-/** Helper class to for accessing JNI fields.
+/** Helper class to access JNI fields.
  */
 class JniUtil {
 public:
     JniUtil(JNIEnv *env) : env(env) {
     }
     string toString(jstring jniString);
-    vector<unsigned char> getByteArrayField(jobject object, const char *name);
+    vector<char> getByteArrayField(jobject object, const char *name);
     void setBytearrayField(jobject, const char *name, char *bytes, int length);
 
     string getStringField(jobject object, const char *name);
