@@ -10,8 +10,7 @@ SET ANDROID_NDK=%NDK%
 SET PYTHON_HOME=%HOMEPATH%\AppData\Local\Programs\Python\Python36
 SET CMAKE_HOME=%ProgramFiles%\CMake
 
-SET OPENCV_SOURCE_CODE_DIR=%HOMEPATH%\Downloads\opencv-3.2.0
-
+SET OPENCV_SOURCE_CODE_DIR=%HOMEPATH%\Documents\dev\opencv-3.2.0
 SET CC=clang
 SET CXX=clang++
 SET CMAKE_C_COMPILER=clang
