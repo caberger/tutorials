@@ -18,5 +18,5 @@ endlocal
 popd
 @echo off
 echo "------------- signature -------------------"
-javap -s -cp build/intermediates/classes/debug/ com.example.christianaberger.cpptest.Mushroom
+javap -s -cp build/intermediates/classes/debug/ com.example.christianaberger.opencv.Mushroom
 echo "-------------------------------------------"

@@ -1,9 +1,10 @@
 @echo off
 
+setlocal
+
 set KEY="HKLM\SOFTWARE\JavaSoft\Java Development Kit"
 set VALUE=CurrentVersion
 
-setlocal
 ::- Get the Java Version
 reg query %KEY% /v %VALUE% 2>nul || (
     echo Error: JDK not installed
