@@ -19,7 +19,7 @@ xcopy /y %STANDALONE_TOOLCHAIN%\x86_64-linux-android\lib64\libgnustl_shared.so s
 pushd src\main\java
 
 @echo off
-echo ------------- signature -------------------
-javap -s -cp build/intermediates/classes/debug/ com.example.christianaberger.cpptest.Mushroom
-echo "-------------------------------------------"
+REM echo ------------- signature -------------------
+REM javap -s -cp build/intermediates/classes/debug/ com.example.christianaberger.cpptest.Mushroom
+REM echo "-------------------------------------------"
 popd

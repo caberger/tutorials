@@ -66,7 +66,7 @@ jobject MushroomMarshaller::asJavaObject(jclass clazz, const Mushroom& mushroom)
     return object;
 }
 extern "C"
-JNIEXPORT jobjectArray JNICALL Java_com_example_christianaberger_cpptest_MushroomDetector_computeSchwammerlType
+JNIEXPORT jobjectArray JNICALL Java_com_example_mushroom_identifier_MushroomDetector_computeSchwammerlType
         (JNIEnv *env, jobject mushroomDetector, jobjectArray templates, jstring filePath) {
     JniUtil util(env);
     MushroomMarshaller marshaller(env);

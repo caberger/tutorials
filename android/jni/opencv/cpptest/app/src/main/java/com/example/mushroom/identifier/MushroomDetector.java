@@ -1,4 +1,4 @@
-package com.example.christianaberger.cpptest;
+package com.example.mushroom.identifier;
 
 /**
  * Schwammerlerkennungs - JNI Bridge

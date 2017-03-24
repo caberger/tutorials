@@ -1,4 +1,4 @@
-package com.example.christianaberger.cpptest;
+package com.example.mushroom.identifier;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
