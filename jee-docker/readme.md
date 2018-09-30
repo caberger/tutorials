@@ -1,7 +1,7 @@
 JEE Docker Application Stack
 ===
 
-The JEE Docker Application stack is local environment to run develop, run and test Java Enterprise Applications.
+The JEE Docker Application stack is a local environment to develop Java Enterprise Applications.
 
 Service Stack
 ---
@@ -35,14 +35,14 @@ The following ports are used.
 
 | Port |description |
 |-------:|------------|
-|  **80**| the http port where nginx www - server listens |
+|  [80](http://localhost)| the http port where nginx www - server listens |
 |**3306**| mysql Database server |
-|**4000**| phpmyadmin |
-|**8080**| wildfly application server |
-|**9990**| wildfly management console |
-|**8000**| debug port for debugging wildfly as a remote application |
+|**[5050](http://localhost:4000)**| phpmyadmin |
+|**[8080](http://localhost:8080)**| wildfly application server |
+|**[9990](http://localhost:)**| wildfly management console |
+|**8000**| debug port for debugging wildfly as a remote java application |
 
-Before starting please verify that they none of the ports in the table above are already used by existing services on your machine.
+Before starting please verify that none of the ports in the table above is already used by existing services on your machine.
 
 Example:
 - On Windows to check if port 8000 is free run the following command
@@ -51,6 +51,13 @@ Example:
 
 In both cases nothing should be listed.
 
+
+JNDI Datasource
+---
+
+During docker build a database **mydb** is added to the mysql server. 
+This database ist installed as a JNDI data source in the wildfly application server.
+The JNDI name is ```java:jboss/datasources/mydb```
 
 
 

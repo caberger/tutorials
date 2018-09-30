@@ -5,7 +5,7 @@ USER root
 COPY docker-entrypoint.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh && \
-    yum -y update && yum -y install bash mysql-connector-java mysql && \
+    yum -y install bash mysql-connector-java mysql && \
     yum clean all && \
     rm -f /var/log/yum.log
 
