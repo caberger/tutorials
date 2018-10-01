@@ -8,7 +8,7 @@ services:
     ports:
       - 8080:8080
       - 9990:9990
-      - 8000:8787
+      - 8787:8787
     depends_on:
       - mysql
     environment:

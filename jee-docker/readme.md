@@ -40,13 +40,13 @@ The following ports are used.
 |**[5050](http://localhost:4000)**| phpmyadmin |
 |**[8080](http://localhost:8080)**| wildfly application server |
 |**[9990](http://localhost:)**| wildfly management console |
-|**8000**| debug port for debugging wildfly as a remote java application |
+|**8787**| debug port for debugging wildfly as a remote java application |
 
 Before starting please verify that none of the ports in the table above is already used by existing services on your machine.
 
 Example:
-- On Windows to check if port 8000 is free run the following command
-```netstat -an | findstr 8000``` 
+- On Windows to check if port 8080 is free run the following command
+```netstat -an | findstr 8080``` 
 - On OSX or linx to check that port 3306 is available run the command ```netstat -ant | grep 3306```
 
 In both cases nothing should be listed.
