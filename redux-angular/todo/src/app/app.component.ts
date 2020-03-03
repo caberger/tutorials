@@ -15,7 +15,6 @@ export class AppComponent {
     counter = 0
     
     constructor(private changeDetector: ChangeDetectorRef) {
-        
     }
     get todos() {
         return store.getState().todos
