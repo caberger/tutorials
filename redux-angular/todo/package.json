@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npx ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -20,7 +20,9 @@
     "@angular/platform-browser-dynamic": "~9.0.3",
     "@angular/router": "~9.0.3",
     "redux": "^4.0.5",
-    "rxjs": "~6.5.4",
+    "redux-observable": "^1.2.0",
+    "rxjs": "^6.5.4",
+    "rxjs-compat": "^6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

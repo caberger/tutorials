@@ -1,5 +1,8 @@
 import { Component } from '@angular/core'
 import { store } from '../model/store.js'
+import {Store} from 'redux'
+import {addTodo} from "../model/actions"
+
 
 @Component({
     selector: 'app-root',
@@ -16,7 +19,10 @@ export class AppComponent {
         }
     }
     ngOnInit() {
+        const tsStore:Store = store
+        tsStore.subscribe(() => {console.log("state changed", store.getState())})
         console.log("init...", store.getState())
+        store.dispatch(addTodo(1, "test"))
     }
 }
 
