@@ -11,16 +11,12 @@ import {addTodo} from "../model/actions"
 })
 export class AppComponent {
     title = 'todo'
+    tsStore:Store = store
 
-    todos() {
-        get:
-        {
-            return store.getState().todos
-        }
-    }
     ngOnInit() {
-        const tsStore:Store = store
-        tsStore.subscribe(() => {console.log("state changed", store.getState())})
+        this.tsStore.subscribe(() => {
+            console.log("state changed", store.getState())
+        })
         console.log("init...", store.getState())
         store.dispatch(addTodo(1, "test"))
     }
