@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core'
-import {store, storeObservable} from "../model/store"
+import {store, stateObservable} from "../model/store"
 import {State} from "../model/state"
 import {addTodo} from "../model/actions"
 import {map, distinctUntilChanged} from "rxjs/operators"
@@ -24,7 +24,7 @@ export class AppComponent {
         store.dispatch(addTodo(id, text))
     }
     ngOnInit() {
-        storeObservable
+        stateObservable
             .pipe(
                 map((state:State) => state.todos),
                 distinctUntilChanged()
