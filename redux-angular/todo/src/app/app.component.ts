@@ -1,8 +1,8 @@
 import { Component } from '@angular/core'
-import { store } from '../model/store.js'
-import {Store} from 'redux'
+import {store, storeObservable} from "../model/store"
+import {State} from "../model/state"
 import {addTodo} from "../model/actions"
-
+import {map, distinctUntilChanged} from "rxjs/operators"
 
 @Component({
     selector: 'app-root',
@@ -10,15 +10,22 @@ import {addTodo} from "../model/actions"
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    title = 'todo'
-    tsStore:Store = store
+    title = "Redux Demo"
+    counter = 0
 
+    get todos() {
+        return store.getState().todos
+    }
+    add(id: number, text: string) {
+        store.dispatch(addTodo(id, text))
+    }
     ngOnInit() {
-        this.tsStore.subscribe(() => {
-            console.log("state changed", store.getState())
-        })
-        console.log("init...", store.getState())
-        store.dispatch(addTodo(1, "test"))
+        const todos = map((state:State) => state.todos)
+        todos(storeObservable).pipe(distinctUntilChanged()).subscribe(todos => console.log("todos changed", todos))
+    }
+    click() {
+        this.counter++
+        this.add(this.counter, `clicks: ${this.counter}`)
     }
 }
 

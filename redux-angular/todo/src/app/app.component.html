@@ -1,4 +1,12 @@
 <div>
-  Hello world!
+  {{title}}
+</div>
+<div>
+  <button (click)="click()">Add ToDo</button>
+  <ul>
+    <li *ngFor="let todo of todos">
+      {{todo.text}}
+    </li>
+  </ul>
 </div>
 <router-outlet></router-outlet>
