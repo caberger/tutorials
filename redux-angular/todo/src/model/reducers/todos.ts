@@ -1,10 +1,8 @@
 import {TodoAction, AddTodoAction, ToggleToDoAction} from "../actions"
-import {State} from "../state"
 import {ADD_TODO, TOGGLE_TODO} from "../actions"
 import {ToDo} from "../state/todo"
 
-
-export function todoReducer(state = [], action: TodoAction) {
+export function todoReducer(state = [], action: TodoAction): ToDo[] {
     let st = state
     switch(action.type) {
         case ADD_TODO: {

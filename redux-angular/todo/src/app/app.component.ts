@@ -1,8 +1,9 @@
-import { Component } from '@angular/core'
+import { Component, ChangeDetectorRef } from '@angular/core'
 import {store, storeObservable} from "../model/store"
 import {State} from "../model/state"
 import {addTodo} from "../model/actions"
 import {map, distinctUntilChanged} from "rxjs/operators"
+import {ToDo} from "../model/state/todo"
 
 @Component({
     selector: 'app-root',
@@ -10,9 +11,12 @@ import {map, distinctUntilChanged} from "rxjs/operators"
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    title = "Redux Demo"
+    title = "Redux - Angular Demo"
     counter = 0
-
+    
+    constructor(private changeDetector: ChangeDetectorRef) {
+        
+    }
     get todos() {
         return store.getState().todos
     }
@@ -20,8 +24,15 @@ export class AppComponent {
         store.dispatch(addTodo(id, text))
     }
     ngOnInit() {
-        const todos = map((state:State) => state.todos)
-        todos(storeObservable).pipe(distinctUntilChanged()).subscribe(todos => console.log("todos changed", todos))
+        storeObservable
+            .pipe(
+                map((state:State) => state.todos),
+                distinctUntilChanged()
+            )
+            .subscribe((todos:ToDo[]) => {
+                console.log("todos changed", todos)
+                this.changeDetector.markForCheck()
+            })
     }
     click() {
         this.counter++

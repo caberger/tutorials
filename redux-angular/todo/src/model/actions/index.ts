@@ -3,7 +3,6 @@
  */
 export const ADD_TODO = 'ADD_TODO'
 export const TOGGLE_TODO = 'TOGGLE_TODO'
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 
 export class TodoAction {
     type: string
@@ -32,10 +31,10 @@ export class ToggleToDoAction extends TodoAction {
 /*
  * action creators
  */
-export function addTodo(id: number, text: string) : any {
+export function addTodo(id: number, text: string) : AddTodoAction {
   return {type: ADD_TODO, id, text}
 }
-export function toggleTodo(index: number): any {
+export function toggleTodo(index: number): ToggleToDoAction {
   return {type: TOGGLE_TODO, index}
 }
 
