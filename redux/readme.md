@@ -1,6 +1,7 @@
-# Redux - Angular Demo
+# Redux - Angular and lit-html Demo
 
-This tutorial demonstrates how to use [Redux](https://redux.js.org/) in an [Angular](https://angular.io/) component without using any complicated foreign libraries.
+This tutorial demonstrates how to use [Redux](https://redux.js.org/) in an [Angular](https://angular.io/) component
+as well as redux in a [lit-html](https://lit-html.polymer-project.org/) project.
 
 Building
 ---
