@@ -9,7 +9,6 @@ class ReduxDemo extends HTMLElement {
         this.attachShadow({mode: 'open'})
     }
     connectedCallback() {
-        console.log("connected")
         stateObservable
             .distinctUntilChanged()
             .subscribe(state => this.render(state))
@@ -19,7 +18,6 @@ class ReduxDemo extends HTMLElement {
         render(this.todos(state ? state.todos : []), this.shadowRoot)
     }
     todos(todos) {
-        console.log("render", todos)
         const lines = todos.map(todo => html`<li>${todo.text}</li>`)
         return html`
             <button @click=${this.click}>Add ToDo</button>
